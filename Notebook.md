@@ -4,6 +4,16 @@
 比如某一列的数据范围肯定在0~255之中，那么我们可以指定为np.uint8类型，如果不手动指定的话默认为np.int64类型，这之间的差距巨大。
 读取 CSV 的时候指定相关列的类型 {‘col_a’: np.float64, ‘col_b’: np.int32}，否则 pandas 会产生大量的 object
 
+以numpy为例，浮点数有以下几种精度，float16, float32, float64, 并且默认的精度是float64。但是通常情况下float32，甚至float16的精度就已经足够了，所以可以用array的astype函数将float64转成float16或32。
+
+```python
+import numpy as np
+type(np.random.random(5)[0])
+
+type(np.random.random(5).astype(np.float16)[0])
+
+```
+
 尽量减少 DataFrame 的数量
 尽量减少赋值导致的 COPY, 修改时带上 inplace=True
 
