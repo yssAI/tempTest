@@ -1,0 +1,46 @@
+from server3.entity.project import Project
+
+from server3.repository.general_repo import Repo
+
+from server3.business.project_business import ProjectBusiness
+
+from server3.business.course_unit_business import CourseUnitBusiness
+
+
+# projects = Repo.read()
+
+repo = Repo(Project)
+projects = repo.read({'classroom': True})
+# print(objects)
+# projects = Project(classroom=True)
+# projects = Project(classroom__ne=True)
+for each_object in projects:
+    class_object = each_object.unit or each_object.course
+    # if name is not None:
+    if class_object is not None:
+        # print(class_object.name, each_object.path)
+        ProjectBusiness.reset_classroom(each_object.path, class_object.name)
+        # print(name.name)
+    # print(name)
+    # try:
+    #     name = each_object.unit
+    # except:
+    #     name = each_object.course
+    # print(name.name)
+    # print(each_object.display_name)
+    # try:
+    #     name = each_object.unit
+    # except:
+    #     name = each_object.course
+    # print(name)
+
+# projects = cls.business.repo.read({'privacy': 'public'})
+
+# print(projects)
+
+# try:
+#     name = CourseUnitBusiness.get_name_by_unit_id(
+#         project.to_mongo()['unit'])
+# except:
+#     name = CourseBusiness.get_name_by_course_id(
+#         project.to_mongo()['course'])
